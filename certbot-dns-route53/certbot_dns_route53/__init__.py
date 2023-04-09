@@ -48,7 +48,15 @@ the required permissions <https://docs.aws.amazon.com/Route53/latest
                ],
                "Resource" : [
                    "arn:aws:route53:::hostedzone/YOURHOSTEDZONEID"
-               ]
+               ],
+               "Condition": {
+                   "ForAllValues:StringEquals": {
+                       "route53:ChangeResourceRecordSetsRecordTypes": "TXT"
+                   },
+                   "ForAllValues:StringLike": {
+                       "route53:ChangeResourceRecordSetsNormalizedRecordNames": "_acme-challenge.*"
+                   }
+               }
            }
        ]
    }
